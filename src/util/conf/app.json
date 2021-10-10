@@ -1,0 +1,5 @@
+{
+    "SERVER_URL": "https://example.com/api/",
+    
+    "DATE_FORMAT": " YYYY-MM-DDTHH:mm:ss. sssZ "
+}

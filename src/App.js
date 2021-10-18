@@ -5,10 +5,22 @@ import './App.css';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import  Link  from '@mui/material/Link';
 import Button from '@mui/material/Button';
-import Link from '@mui/material/Link';
+import Grid from "@mui/material/Grid";
 import Moment from 'react-moment';
 import 'moment-timezone';
+/** Importing Routing information */
+//conditionally on the paths :id value.import React from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link as RouterLink,
+  useRouteMatch,
+  useParams
+} from "react-router-dom";
+
 
 /** Local imports */
 import { currentDate } from './util/Date.js';
@@ -31,7 +43,23 @@ function App() {
   const dateToFormat = 'YYYY-MM-DDTHH:mm:ss. sssZ ';
 
   return (
+    
     <div className="App">
+      <Router>
+      <div>
+        <ul>
+          <li><Link component={RouterLink} to='/'>Home</Link></li>
+          <li><Link component={RouterLink} to='/about'>About</Link></li>
+          <li><Link component={RouterLink} to='/apis'>Apis</Linknp></li>
+        </ul>
+      
+        <Switch>
+          <Route path="/about"><About /></Route>
+          <Route path="/apis"><Apis /></Route>
+          <Route path="/"><Home /></Route>
+        </Switch>
+      </div>
+    </Router>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <Typography variant="h1">Typography test</Typography>
@@ -61,3 +89,31 @@ function App() {
 export default App;
 
 
+function Home() {
+  return <h2>Home</h2>;
+}
+
+function About() {
+  return <h2>About</h2>;
+}
+/**
+ * 
+ * @returns 
+ */
+function Apis() {
+  let match = useRouteMatch();
+
+  return (
+    <div>
+      <h2>Apis</h2>
+    </div>
+      )
+  } 
+  /**
+   * 
+   * @returns 
+   */
+  function Api() {
+    let { apiId } = useParams();
+    return <h3>Requested API ID: {apiId}</h3>;
+  }
